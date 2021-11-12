@@ -6,6 +6,7 @@
   :license "Apache"
   :components (
     (:file "mypackage")
-    (:file "psample")
+    (:file "sample1")
+    (:file "sample2")
   )
 )
