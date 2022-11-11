@@ -1,0 +1,8 @@
+2021/12/11土
+・packageはどこにおくか
+　たとえば、package.lispを作っておいてその最後に(in-package ...)を書く
+　systemでは、最初にそれをloadし、書く定義はpackageを示さずに書く
+
+　するとload順序でうまくいくのではないか??
+
+
