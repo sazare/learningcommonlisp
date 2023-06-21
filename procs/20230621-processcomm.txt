@@ -1,0 +1,22 @@
+20230621-processcomm
+
+子プロセスから親ブロセスに情報を渡す方法
+
+　return value(exit value)は0,1,2など意味がrun-programで決まっている。
+
+　だから、ファイルで渡すしかない。
+
+　ファイルの出力はできたので、それをどう処理するか。
+　何かのプロコトルを決めてやりとりするのだろう。
+
+　一方で、パイプもある。
+
+ (with-open-stream (stream (sys:open-pipe "/tmp/foo" :direction :io))
+   (format stream "mississippi~%")
+   (finish-output stream)
+   (read-line stream))
+
+親子でパイプを共有するにはどうすればよいか?　os側だと、exec関数でプロセスを
+cloneしてパイプを共有するようなやり方だったと思う。
+
+ /tmp/なんとか　で、一時ファイルを作って受け渡しするか。
