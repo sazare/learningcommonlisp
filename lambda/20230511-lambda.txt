@@ -1,0 +1,12 @@
+ (defmacro λ (&rest args) `(lambda ,@args))
+
+(apply (λ (x) (car x)) '((a b c)))
+
+A
+
+(apply (λ (x y) (cons x y)) '(a b))
+
+(A . B)
+
+これでいいのかな
+

@@ -1,4 +1,4 @@
-;; Practical Commonlisp CD DB
+Commonlisp CD DB
 (myload "load-ito.lisp")
 
 (defvar *vvv* nil)

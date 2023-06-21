@@ -1,0 +1,9 @@
+
+lisp
+ (load "load-procs.lisp")
+ (in-package :procloop)
+ (outsider 123 'data)
+
+after succeed.
+see olog2
+
