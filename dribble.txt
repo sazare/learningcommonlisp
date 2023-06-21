@@ -1,0 +1,6 @@
+(dribble "file")
+...
+(dribble)
+
+...のreplのやりとりがfileに出力される
+

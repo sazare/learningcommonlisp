@@ -1,0 +1,25 @@
+;;; LTKでボタンを表示する
+
+(ql:quickload :ltk)
+
+
+;; パッケージの作成
+(defpackage :ex4-01
+  (:use :common-lisp
+        :ltk)
+  (:export :main))
+
+(in-package :ex4-01)
+
+(defun main ()
+  (with-ltk ()
+    (wm-title *tk* "Button TEST")
+    (let* ((b (make-instance
+              'button
+                :text "ボタン"
+                :command (lambda ()
+                           (format t "ボタンを押しました")
+                           (setf *exit-mainloop* t)))))
+      (pack b))))
+
+(main)

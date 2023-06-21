@@ -1,0 +1,102 @@
+https://lispcookbook.github.io/cl-cookbook/web.html
+
+1. (ql:quickload '("hunchentoot" "caveman2" "spinneret" "djula" "easy-routes"))
+
+breakしてもあきらめない。breakの選択肢で、archiveを読み直して実行があったので、選択すると動いた
+
+
+2. port定義
+(defvar *acceptor* (make-instance 'hunchentoot:easy-acceptor :port 4342))
+(hunchentoot:start *acceptor*)
+
+chromeを立ち上げ http://127.0.0.1:4342/ とするとWelcomeページになる。
+　* Safariではurlが変換されアクセスできない
+
+  Hunchentootが動いたことの確認になる。
+
+ http://127.0.0.1:4242/ は見える
+
+hunchentootのデフォルトはここらしい
+/Users/shin/quicklisp/dists/quicklisp/software/hunchentoot-v1.3.0
+ここのWWWに、http://127.0.0.1/でみえてるindex.htmlがある。とかげのベーじ
+* これを変更するのはどうするか? しないで使えばよいけど。
+
+http://127.0.0.1:4342/　　　　　　　　とかげ
+http://127.0.0.1:4342/index.html　　　とかげ  これはなしがindex.htmlになっているのだろう
+http://127.0.0.1:4342/web/index.html　(www/web/index.html)に変換されたのだろう
+
+
+
+*** サーバーを動かすREPLに、webサーバーのメッセージがでているが、newlineするとpromptがでる。そこでコマンドなどを入力する。
+
+3. 別のボートに別のacceptorをつなげる
+2つめのアクセプター。
+
+(defvar *my-acceptor* (make-instance 'hunchentoot:easy-acceptor :port 4444
+                                   :document-root #p"www/web/"))
+(hunchentoot:start *my-acceptor*)
+
+とすると
+
+http://127.0.0.1:4342/web/index.html
+http://127.0.0.1:4342/www/index.html
+
+wwwはsecond server, webは最初のサーバ
+
+できりわけられた。しかし
+http://127.0.0.1:4444/www/index.html
+http://127.0.0.1:4444/web/index.html
+
+はnot found
+
+ということは、4444:webへのリクエストは、4342にルーティングされているということか
+ちがう。4444のポートしていすべてNotFoundになる。
+ルーティングしていない。
+webの作り方がまずいのかも
+
+ここまででわかったこと
+
+
+
+
+
+
+*** router
+*** routing 
+定義する
+(defun hello ()
+   (format nil "Hello, it works!"))
+
+(push
+  (hunchentoot:create-prefix-dispatcher "/hello.html" #'hello)
+  hunchentoot:*dispatch-table*)
+
+として
+(defvar *server* (make-instance 'hunchentoot:easy-acceptor :port 4242))
+とする
+
+(hunchentoot:start *server*)が必要と書かれているが、この流れだと不用。
+
+chromeで http://127.0.0.1:4242/hello.html とするとHello画面がでる。
+
+ccccccccccccccccccc
+routing more G
+
+(hunchentoot:define-easy-handler (say-yo :uri "/yo") (name)
+  (setf (hunchentoot:content-type*) "text/plain")
+  (format nil "Hey~@[ ~A~]!" name))
+
+として
+http://127.0.0.1:4242/yo?name=Shin
+
+で
+
+Hey shin!
+
+
+
+
+
+
+
+

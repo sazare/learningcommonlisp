@@ -1,0 +1,6 @@
+dynamics           iframe with ningle page
+nin-1.lisp
+nin-2.lisp
+nin-3.lisp
+nin-upchrome.lisp   run nin-3 on chrome
+nin-upsafari.lisp  run nin-3 on safari
