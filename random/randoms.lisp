@@ -12,3 +12,21 @@
 
 ;(rando 60 30)
 
+;;;
+
+(defun randl (cs N)
+  (let ((nc (1-  (length cs))))
+    (loop for i from 1 to N collect 
+      (nth (random nc) cs)
+    )
+  )
+)
+
+(defparameter c1000 (randl c95 1000))
+
+(defun showc (cs) 
+  (loop for c in cs do
+    (format t "~c" c)
+  )
+)
+
